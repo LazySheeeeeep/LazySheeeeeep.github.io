@@ -21,7 +21,7 @@ repository               : "LazySheeeeeep/LazySheeeeeep.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "self.jpg"
   name             : "Yaoyang Liu (刘耀阳)"
   pronouns         : # example: "she/her"  
   bio              : "The Hong Kong University of Science and Technology"
