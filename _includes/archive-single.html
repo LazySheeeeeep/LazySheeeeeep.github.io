@@ -20,9 +20,17 @@
     <!-- Author list -->
     {% if post.authors %}
       <p style="margin-bottom: 0.3em;">
-        <strong>{{ post.authors }}</strong>
+        {% assign author_list = post.authors | split: ", " %}
+        {% for name in author_list %}
+          {% if name contains "Yaoyang Liu" %}
+            <strong>{{ name }}</strong>{% unless forloop.last %}, {% endunless %}
+          {% else %}
+            {{ name }}{% unless forloop.last %}, {% endunless %}
+          {% endif %}
+        {% endfor %}
       </p>
     {% endif %}
+
 
     <!-- Venue -->
     {% if post.venue %}
