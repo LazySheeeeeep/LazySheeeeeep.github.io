@@ -25,6 +25,8 @@
         {% for name in author_list %}
           {% if name contains "Yaoyang Liu" %}
             <strong>{{ name }}</strong>{% unless forloop.last %}, {% endunless %}
+          {% elsif name contains "YaoYang Liu" %}
+            <strong>{{ name }}</strong>{% unless forloop.last %}, {% endunless %}
           {% else %}
             {{ name }}{% unless forloop.last %}, {% endunless %}
           {% endif %}
