@@ -1,10 +1,10 @@
 <div class="pub-item" style="margin-bottom: 2em; display: flex; align-items: center;">
   {% if post.thumbnail %}
     <img src="{{ post.thumbnail | relative_url }}" alt="thumbnail" 
-         style="width: 120px; height: auto; margin-right: 20px; border-radius: 6px; flex-shrink: 0;">
+         style="width: 180px; height: auto; margin-right: 20px; border-radius: 6px; flex-shrink: 0;">
   {% endif %}
 
-  <div style="flex: 1; line-height: 1.0;">
+  <div style="flex: 1; line-height: 0.8;">
     <!-- Title -->
     <h3 class="archive__item-title" itemprop="headline" style="margin-bottom: 0.5em; font-size: 1.2em;">
       {% if post.project %}
