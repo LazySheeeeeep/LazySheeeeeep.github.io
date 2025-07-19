@@ -2,23 +2,6 @@
    Various functions that we want to use within the template
    ========================================================================== */
 
-// Determine the expected state of the theme toggle, which can be "dark", "light", or
-// "system". Default is "system".
-let determineThemeSetting = () => {
-  let themeSetting = localStorage.getItem("theme");
-  return (themeSetting != "dark" && themeSetting != "light" && themeSetting != "system") ? "system" : themeSetting;
-};
-
-// Determine the computed theme, which can be "dark" or "light". If the theme setting is
-// "system", the computed theme is determined based on the user's system preference.
-let determineComputedTheme = () => {
-  let themeSetting = determineThemeSetting();
-  if (themeSetting != "system") {
-    return themeSetting;
-  }
-  return (userPref && userPref("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
-};
-
 // detect OS/browser preference
 const browserPref = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 
@@ -48,48 +31,10 @@ var toggleTheme = () => {
 };
 
 /* ==========================================================================
-   Plotly integration script so that Markdown codeblocks will be rendered
-   ========================================================================== */
-
-// Read the Plotly data from the code block, hide it, and render the chart as new node. This allows for the 
-// JSON data to be retrieve when the theme is switched. The listener should only be added if the data is 
-// actually present on the page.
-import { plotlyDarkLayout, plotlyLightLayout } from './theme.js';
-let plotlyElements = document.querySelectorAll("pre>code.language-plotly");
-if (plotlyElements.length > 0) {
-  document.addEventListener("readystatechange", () => {
-    if (document.readyState === "complete") {
-      plotlyElements.forEach((elem) => {
-        // Parse the Plotly JSON data and hide it
-        var jsonData = JSON.parse(elem.textContent);
-        elem.parentElement.classList.add("hidden");
-
-        // Add the Plotly node
-        let chartElement = document.createElement("div");
-        elem.parentElement.after(chartElement);
-
-        // Set the theme for the plot and render it
-        const theme = (determineComputedTheme() === "dark") ? plotlyDarkLayout : plotlyLightLayout;
-        if (jsonData.layout) {
-          jsonData.layout.template = (jsonData.layout.template) ? { ...theme, ...jsonData.layout.template } : theme;
-        } else {
-          jsonData.layout = { template: theme };
-        }
-        Plotly.react(chartElement, jsonData.data, jsonData.layout);
-      });
-    }
-  });
-}
-
-/* ==========================================================================
    Actions that should occur when the page has been fully loaded
    ========================================================================== */
 
 $(document).ready(function () {
-  // SCSS SETTINGS - These should be the same as the settings in the relevant files 
-  const scssLarge = 925;          // pixels, from /_sass/_themes.scss
-  const scssMastheadHeight = 70;  // pixels, from the current theme (e.g., /_sass/theme/_default.scss)
-
   // If the user hasn't chosen a theme, follow the OS preference
   setTheme();
   window.matchMedia('(prefers-color-scheme: dark)')
@@ -117,8 +62,10 @@ $(document).ready(function () {
   var didResize = false;
   bumpIt();
 
-  // FitVids init
-  fitvids();
+  // FitVids init - 只有在 fitvids 函数存在时才调用
+  if (typeof fitvids === 'function') {
+    fitvids();
+  }
 
   // Follow menu drop down
   $(".author__urls-wrapper button").on("click", function () {
@@ -128,44 +75,46 @@ $(document).ready(function () {
 
   // Restore the follow menu if toggled on a window resize
   jQuery(window).on('resize', function () {
-    if ($('.author__urls.social-icons').css('display') == 'none' && $(window).width() >= scssLarge) {
+    if ($('.author__urls.social-icons').css('display') == 'none' && $(window).width() >= 925) {
       $(".author__urls").css('display', 'block')
     }
   });
 
-  // Init smooth scroll, this needs to be slightly more than then fixed masthead height
+  // Init smooth scroll
   $("a").smoothScroll({
-    offset: -scssMastheadHeight,
+    offset: -70,
     preventDefault: false,
   });
 
   // add lightbox class to all image links
   $("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.JPG'],a[href$='.png'],a[href$='.gif']").addClass("image-popup");
 
-  // Magnific-Popup options
-  $(".image-popup").magnificPopup({
-    type: 'image',
-    tLoading: 'Loading image #%curr%...',
-    gallery: {
-      enabled: true,
-      navigateByImgClick: true,
-      preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-    },
-    image: {
-      tError: '<a href="%url%">Image #%curr%</a> could not be loaded.',
-    },
-    removalDelay: 500, // Delay in milliseconds before popup is removed
-    // Class that is added to body when popup is open.
-    // make it unique to apply your CSS animations just to this exact popup
-    mainClass: 'mfp-zoom-in',
-    callbacks: {
-      beforeOpen: function() {
-        // just a hack that adds mfp-anim class to markup
-        this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
-      }
-    },
-    closeOnContentClick: true,
-    midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
-  });
+  // Magnific-Popup options - 只有在 magnificPopup 存在时才调用
+  if ($.fn.magnificPopup) {
+    $(".image-popup").magnificPopup({
+      type: 'image',
+      tLoading: 'Loading image #%curr%...',
+      gallery: {
+        enabled: true,
+        navigateByImgClick: true,
+        preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+      },
+      image: {
+        tError: '<a href="%url%">Image #%curr%</a> could not be loaded.',
+      },
+      removalDelay: 500, // Delay in milliseconds before popup is removed
+      // Class that is added to body when popup is open.
+      // make it unique to apply your CSS animations just to this exact popup
+      mainClass: 'mfp-zoom-in',
+      callbacks: {
+        beforeOpen: function() {
+          // just a hack that adds mfp-anim class to markup
+          this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+        }
+      },
+      closeOnContentClick: true,
+      midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+    });
+  }
 
 });
