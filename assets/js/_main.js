@@ -1,70 +1,65 @@
-// main.js
-(function ($) {
-  "use strict";
+/* ==========================================================================
+   jQuery plugin settings and other scripts
+   ========================================================================== */
 
-  /* ==========================================================================
-     Theme toggle
-     ========================================================================== */
+$(document).ready(function(){
+  // Sticky footer
+  var bumpIt = function() {
+      $("body").css("margin-bottom", $(".page__footer").outerHeight(true));
+    },
+    didResize = false;
 
-  // 获取本地存储中的主题
-  const getStoredTheme = () => localStorage.getItem("theme");
+  bumpIt();
 
-  // 设置主题并应用到 document root
-  const setTheme = (theme) => {
-    if (theme === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.setAttribute("data-theme", "light");
-      localStorage.setItem("theme", "light");
+  $(window).resize(function() {
+    didResize = true;
+  });
+  setInterval(function() {
+    if (didResize) {
+      didResize = false;
+      bumpIt();
     }
+  }, 250);
+  
+  // FitVids init
+  fitvids();
 
-    // 更换主题图标
-    $("#theme-icon")
-      .removeClass("fa-sun fa-moon")
-      .addClass(theme === "dark" ? "fa-moon" : "fa-sun");
-
-    // Plotly 主题切换
-    if (typeof Plotly !== "undefined") {
-      const newTheme = theme === "dark" ? "plotly_dark" : "plotly";
-      const plots = document.querySelectorAll(".js-plotly-plot");
-      plots.forEach((plot) => {
-        Plotly.relayout(plot, { template: newTheme });
-      });
-    }
-  };
-
-  // 主题切换函数
-  const toggleTheme = (e) => {
-    e.preventDefault();
-    const currentTheme = getStoredTheme() || getPreferredTheme();
-    const newTheme = currentTheme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-  };
-
-  // 获取系统偏好
-  const getPreferredTheme = () => {
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  };
-
-  // 页面加载时设置主题
-  const initTheme = () => {
-    const storedTheme = getStoredTheme();
-    const useTheme = storedTheme || getPreferredTheme();
-    setTheme(useTheme);
-
-    // 响应系统主题变化（可选）
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-      if (!getStoredTheme()) {
-        setTheme(e.matches ? "dark" : "light");
-      }
-    });
-  };
-
-  // 初始化主题切换器监听器
-  $(document).ready(function () {
-    initTheme();
-    $("#theme-toggle").on("click", toggleTheme);
+  // Follow menu drop down
+  $(".author__urls-wrapper button").on("click", function() {
+    $(".author__urls").fadeToggle("fast", function() {});
+    $(".author__urls-wrapper button").toggleClass("open");
   });
 
-})(jQuery);
+  // init smooth scroll, this needs to be slightly more than then fixed masthead height
+  $("a").smoothScroll({offset: -65});
+
+  // add lightbox class to all image links
+  $("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.JPG'],a[href$='.png'],a[href$='.gif']").addClass("image-popup");
+
+  // Magnific-Popup options
+  $(".image-popup").magnificPopup({
+    type: 'image',
+    tLoading: 'Loading image #%curr%...',
+    gallery: {
+      enabled: true,
+      navigateByImgClick: true,
+      preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+    },
+    image: {
+      tError: '<a href="%url%">Image #%curr%</a> could not be loaded.',
+    },
+    removalDelay: 500, // Delay in milliseconds before popup is removed
+    // Class that is added to body when popup is open.
+    // make it unique to apply your CSS animations just to this exact popup
+    mainClass: 'mfp-zoom-in',
+    callbacks: {
+      beforeOpen: function() {
+        // just a hack that adds mfp-anim class to markup
+        this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+      }
+    },
+    closeOnContentClick: true,
+    midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+  });
+
+});
