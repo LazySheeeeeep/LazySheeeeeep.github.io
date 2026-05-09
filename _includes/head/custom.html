@@ -501,6 +501,288 @@
     border-radius: 5px;
   }
   ::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
+  /* ==========================================================
+     DARK MODE
+     ========================================================== */
+  html[data-theme="dark"] {
+    --brand-primary:        #6ba4d9;
+    --brand-primary-dark:   #4a89c3;
+    --brand-primary-light:  rgba(107, 164, 217, 0.15);
+    --brand-accent:         #8fc0e8;
+    --brand-accent-dark:    #6ba4d9;
+    --brand-deep:           #b4d2ec;
+    --text-primary:         #e8eef5;
+    --text-secondary:       #b6c2d1;
+    --text-muted:           #8a97a8;
+    --border-soft:          #1e3248;
+    --bg-soft:              #0f1e30;
+  }
+  html[data-theme="dark"] body {
+    background: #0a1628 !important;
+    background-image:
+      radial-gradient(at 12% 8%, rgba(107, 164, 217, 0.08) 0px, transparent 55%),
+      radial-gradient(at 88% 92%, rgba(143, 192, 232, 0.06) 0px, transparent 55%) !important;
+  }
+  html[data-theme="dark"] .masthead {
+    background: rgba(10, 22, 40, 0.75) !important;
+    border-bottom-color: #1e3248 !important;
+  }
+  html[data-theme="dark"] .site-title { color: var(--text-primary) !important; }
+  html[data-theme="dark"] .greedy-nav a { color: var(--text-secondary) !important; }
+  html[data-theme="dark"] .greedy-nav a:not(.site-title):hover { color: var(--brand-primary) !important; }
+
+  /* Cards turn into translucent dark panels with subtle glow */
+  html[data-theme="dark"] .timeline-item,
+  html[data-theme="dark"] .pub-card {
+    background: rgba(18, 32, 52, 0.75);
+    border-color: #1e3248;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 0 0 1px rgba(107, 164, 217, 0.05) inset;
+  }
+  html[data-theme="dark"] .timeline-item:hover,
+  html[data-theme="dark"] .pub-card:hover {
+    border-color: rgba(107, 164, 217, 0.4);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5), 0 0 20px rgba(107, 164, 217, 0.08);
+  }
+  html[data-theme="dark"] .pub-card__title a { color: var(--text-primary); }
+  html[data-theme="dark"] .pub-card__title a:hover { color: var(--brand-primary); }
+  html[data-theme="dark"] .pub-card__venue-tag {
+    background: rgba(107, 164, 217, 0.15);
+    color: var(--brand-primary);
+    border-color: rgba(107, 164, 217, 0.35);
+  }
+  html[data-theme="dark"] .pub-link {
+    background: rgba(30, 50, 72, 0.6);
+    border-color: #1e3248;
+    color: var(--text-secondary) !important;
+  }
+  html[data-theme="dark"] .pub-link:hover {
+    background: var(--brand-primary);
+    color: #0a1628 !important;
+    border-color: var(--brand-primary);
+  }
+
+  /* Author sidebar */
+  html[data-theme="dark"] .author__avatar img {
+    border-color: #1e3248 !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.5), 0 0 24px rgba(107, 164, 217, 0.1);
+  }
+  html[data-theme="dark"] .sidebar .author__name { color: var(--text-primary); }
+  html[data-theme="dark"] .author__urls a { color: var(--text-secondary) !important; }
+  html[data-theme="dark"] .author__urls a:hover {
+    color: var(--brand-primary) !important;
+    background: var(--brand-primary-light);
+  }
+  html[data-theme="dark"] .author__urls i { color: var(--brand-primary); }
+
+  /* In-article link underline adjusts for dark */
+  html[data-theme="dark"] .page__content p a,
+  html[data-theme="dark"] .page__content li a,
+  html[data-theme="dark"] .page__content blockquote a,
+  html[data-theme="dark"] .timeline-desc a {
+    border-bottom-color: rgba(107, 164, 217, 0.35);
+  }
+  html[data-theme="dark"] .page__content p a:hover,
+  html[data-theme="dark"] .page__content li a:hover,
+  html[data-theme="dark"] .page__content blockquote a:hover,
+  html[data-theme="dark"] .timeline-desc a:hover {
+    color: var(--brand-accent);
+    border-bottom-color: var(--brand-accent);
+    background: rgba(107, 164, 217, 0.1);
+  }
+
+  /* CV viewer darker */
+  html[data-theme="dark"] .cv-viewer {
+    background: #0f1e30;
+    border-color: #1e3248;
+  }
+
+  /* Footer */
+  html[data-theme="dark"] .page__footer {
+    background: #070f1c !important;
+    border-top-color: #1e3248 !important;
+    color: var(--text-muted) !important;
+  }
+
+  /* Scrollbar */
+  html[data-theme="dark"] ::-webkit-scrollbar-thumb { background: #2a3f58; }
+  html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: #3d5a7a; }
+  html[data-theme="dark"] ::selection {
+    background: rgba(107, 164, 217, 0.3);
+    color: var(--text-primary);
+  }
+
+  /* ==========================================================
+     STARFIELD (visible only in dark mode)
+     ========================================================== */
+  .starfield {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  html[data-theme="dark"] .starfield { opacity: 1; }
+
+  .starfield .stars {
+    position: absolute;
+    inset: 0;
+    background-repeat: repeat;
+  }
+  /* Three layers of stars of different sizes/densities for parallax depth */
+  .starfield .stars-small {
+    background-image:
+      radial-gradient(1px 1px at 20px 30px,  rgba(255,255,255,0.9), transparent),
+      radial-gradient(1px 1px at 40px 70px,  rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 50px 160px, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 90px 40px,  rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1px 1px at 170px 120px,rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 200px 50px, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 230px 170px,rgba(255,255,255,0.6), transparent);
+    background-size: 260px 200px;
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  .starfield .stars-medium {
+    background-image:
+      radial-gradient(1.5px 1.5px at 60px 90px,  rgba(180,210,236,0.95), transparent),
+      radial-gradient(1.5px 1.5px at 150px 30px, rgba(255,255,255,0.9),  transparent),
+      radial-gradient(1.5px 1.5px at 250px 140px,rgba(200,220,240,0.85), transparent),
+      radial-gradient(1.5px 1.5px at 330px 60px, rgba(255,255,255,0.95), transparent),
+      radial-gradient(1.5px 1.5px at 400px 110px,rgba(180,210,236,0.8),  transparent);
+    background-size: 460px 220px;
+    animation: twinkle 6s ease-in-out infinite;
+    animation-delay: -2s;
+  }
+  .starfield .stars-large {
+    background-image:
+      radial-gradient(2px 2px at 120px 150px, rgba(255,255,255,1),      transparent),
+      radial-gradient(2px 2px at 340px 70px,  rgba(180,210,236,0.95),   transparent),
+      radial-gradient(2px 2px at 560px 220px, rgba(255,255,255,0.9),    transparent),
+      radial-gradient(2px 2px at 700px 100px, rgba(200,220,240,0.95),   transparent);
+    background-size: 800px 300px;
+    animation: twinkle 8s ease-in-out infinite;
+    animation-delay: -4s;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    25%      { opacity: 0.45; }
+    50%      { opacity: 0.85; }
+    75%      { opacity: 0.3; }
+  }
+
+  /* A rare shooting star, runs every ~18s */
+  .starfield .shooting-star {
+    position: absolute;
+    top: 15%;
+    left: -10%;
+    width: 140px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.95), transparent);
+    opacity: 0;
+    animation: shoot 18s ease-in infinite;
+  }
+  .starfield .shooting-star.delay { top: 55%; animation-delay: 9s; }
+  @keyframes shoot {
+    0%   { transform: translate(0, 0) rotate(18deg); opacity: 0; }
+    2%   { opacity: 1; }
+    8%   { transform: translate(120vw, 40vh) rotate(18deg); opacity: 0; }
+    100% { transform: translate(120vw, 40vh) rotate(18deg); opacity: 0; }
+  }
+
+  /* Keep page content above starfield */
+  .masthead, .initial-content, .page__footer { position: relative; z-index: 1; }
+
+  /* ==========================================================
+     THEME TOGGLE BUTTON
+     ========================================================== */
+  .theme-toggle {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--border-soft);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--text-secondary);
+    cursor: pointer;
+    z-index: 100;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                background 0.25s ease,
+                color 0.25s ease,
+                border-color 0.25s ease;
+  }
+  .theme-toggle:hover {
+    transform: scale(1.1) rotate(-12deg);
+    color: var(--brand-primary);
+    border-color: var(--brand-primary);
+  }
+  .theme-toggle:active { transform: scale(0.95); }
+  html[data-theme="dark"] .theme-toggle {
+    background: rgba(18, 32, 52, 0.8);
+    border-color: #1e3248;
+    color: var(--brand-primary);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 0 14px rgba(107, 164, 217, 0.2);
+  }
+  .theme-toggle .icon-sun  { display: none; }
+  .theme-toggle .icon-moon { display: inline-block; }
+  html[data-theme="dark"] .theme-toggle .icon-sun  { display: inline-block; }
+  html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 </style>
+
+<!-- Early theme boot: apply saved theme BEFORE first paint, avoids flash -->
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+</script>
+
+<!-- Inject starfield layer + theme toggle button after DOM is ready -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Starfield (pure CSS layers, always in DOM; hidden in light via opacity)
+    if (!document.querySelector('.starfield')) {
+      var sf = document.createElement('div');
+      sf.className = 'starfield';
+      sf.innerHTML =
+        '<div class="stars stars-small"></div>' +
+        '<div class="stars stars-medium"></div>' +
+        '<div class="stars stars-large"></div>' +
+        '<div class="shooting-star"></div>' +
+        '<div class="shooting-star delay"></div>';
+      document.body.insertBefore(sf, document.body.firstChild);
+    }
+
+    // Theme toggle button
+    if (!document.querySelector('.theme-toggle')) {
+      var btn = document.createElement('button');
+      btn.className = 'theme-toggle';
+      btn.setAttribute('aria-label', 'Toggle dark mode');
+      btn.setAttribute('title', 'Toggle dark mode');
+      btn.innerHTML = '<span class="icon-moon">🌙</span><span class="icon-sun">☀️</span>';
+      btn.addEventListener('click', function() {
+        var cur = document.documentElement.getAttribute('data-theme') || 'light';
+        var next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+      });
+      document.body.appendChild(btn);
+    }
+  });
+</script>
 
 <!-- end custom head snippets -->
