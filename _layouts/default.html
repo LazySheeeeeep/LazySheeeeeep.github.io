@@ -13,6 +13,8 @@ layout: compress
 
   <body>
 
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode" onclick="(function(){var c=document.documentElement.getAttribute('data-theme')||'light';var n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('theme',n);}catch(e){}})();"><span class="icon-moon">🌙</span><span class="icon-sun">☀️</span></button>
+
     {% include browser-upgrade.html %}
     {% include masthead.html %}
 
