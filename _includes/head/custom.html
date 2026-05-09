@@ -129,13 +129,21 @@
     text-decoration: none !important;
   }
 
-  /* ---------- Masthead (top nav) ---------- */
+  /* ---------- Masthead (top nav) — stays fixed at top (theme default) ---------- */
   .masthead {
     background: rgba(255, 255, 255, 0.85) !important;
     backdrop-filter: saturate(180%) blur(12px);
     -webkit-backdrop-filter: saturate(180%) blur(12px);
     border-bottom: 1px solid var(--border-soft) !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    z-index: 50 !important; /* keep above starfield and main content */
+  }
+  /* Neutralize any white backgrounds on nav inner elements so our masthead bg shows through */
+  .masthead__inner-wrap,
+  .greedy-nav,
+  .greedy-nav .visible-links,
+  .greedy-nav .hidden-links {
+    background: transparent !important;
   }
   .site-title {
     font-weight: 700 !important;
@@ -539,8 +547,23 @@
     background: transparent !important;
   }
   html[data-theme="dark"] .masthead {
-    background: rgba(10, 22, 40, 0.75) !important;
+    background: rgba(10, 22, 40, 0.82) !important;
     border-bottom-color: #1e3248 !important;
+    box-shadow: 0 1px 0 rgba(107, 164, 217, 0.08), 0 4px 14px rgba(0,0,0,0.3) !important;
+  }
+  html[data-theme="dark"] .masthead__inner-wrap,
+  html[data-theme="dark"] .greedy-nav,
+  html[data-theme="dark"] .greedy-nav .visible-links,
+  html[data-theme="dark"] .greedy-nav .hidden-links {
+    background: transparent !important;
+  }
+  html[data-theme="dark"] .greedy-nav button {
+    background: transparent !important;
+  }
+  html[data-theme="dark"] .greedy-nav .navicon,
+  html[data-theme="dark"] .greedy-nav .navicon:before,
+  html[data-theme="dark"] .greedy-nav .navicon:after {
+    background: var(--text-secondary) !important;
   }
   html[data-theme="dark"] .site-title { color: var(--text-primary) !important; }
   html[data-theme="dark"] .greedy-nav a { color: var(--text-secondary) !important; }
@@ -683,8 +706,9 @@
     75%      { opacity: 0.3; }
   }
 
-  /* Keep page content above starfield (pseudo elements have z-index 0) */
-  .masthead, .page__footer, #main { position: relative; z-index: 1; }
+  /* Keep page content above starfield (pseudo elements have z-index 0).
+     NOTE: do NOT touch .masthead here – theme sets it to position:fixed; z-index:20 already. */
+  .page__footer, #main { position: relative; z-index: 1; }
 
   /* ==========================================================
      THEME TOGGLE BUTTON
