@@ -70,6 +70,18 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: transparent !important;
+    /* Sticky footer: make body a flex column so #main can grow and push footer down */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  /* #main fills remaining vertical space so .page__footer sits at the bottom
+     when content is short, but still flows naturally when content is long. */
+  #main {
+    flex: 1 0 auto;
+  }
+  .page__footer {
+    flex-shrink: 0;
   }
   /* Make content wrappers transparent so html background (and starfield) show through */
   .initial-content,
