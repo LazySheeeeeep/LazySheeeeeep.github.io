@@ -54,3 +54,7 @@ I'm a first-year Ph.D. student at [HKUST](https://hkust.edu.hk/), advised by [Pr
     <p class="timeline-desc">Research on interactive video generation and world models.</p>
   </li>
 </ul>
+
+<p class="visitor-badge" align="center" style="margin-top:2.5em;">
+  <img src="https://visitor-badge.laobi.icu/badge?page_id=LazySheeeeeep.github.io&left_color=gray&right_color=%231a4d7a&left_text=visitors" alt="visitors">
+</p>

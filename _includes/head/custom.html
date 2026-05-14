@@ -207,6 +207,12 @@
   .author__urls li {
     margin-bottom: 4px;
   }
+  /* Non-link items (location, employer) keep the same horizontal padding
+     as anchor items so that text left edges align in the sidebar list. */
+  .author__urls li.author__desktop {
+    padding: 4px 8px;
+    color: var(--text-secondary);
+  }
   .author__urls a {
     color: var(--text-secondary) !important;
     padding: 4px 8px !important;
@@ -221,6 +227,19 @@
   }
   .author__urls i {
     color: var(--brand-primary);
+  }
+  /* Force consistent icon width so the text after every icon
+     (location / email / scholar / github ...) starts at the same x. */
+  .author__urls i.fa,
+  .author__urls i.fas,
+  .author__urls i.fab,
+  .author__urls i.fa-solid,
+  .author__urls i.fa-regular,
+  .author__urls i.fa-brands,
+  .author__urls i.ai {
+    display: inline-block;
+    width: 1.25em;
+    text-align: center;
   }
 
   /* ---------- Home Hero ---------- */
