@@ -15,11 +15,6 @@
     {% if site.atom_feed.hide != true %}
     <li><a href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ base_path }}/feed.xml{% endif %}"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].feed_label | default: "Feed" }}</a></li>
     {% endif %}
-    {% if page.url == "/" %}
-    <li class="visitor-badge-item">
-      <img src="https://visitor-badge.laobi.icu/badge?page_id=LazySheeeeeep.github.io.home&left_color=gray&right_color=%231a4d7a&left_text=visitors" alt="visitors">
-    </li>
-    {% endif %}
   </ul>
 </div>
 {% endif %}
