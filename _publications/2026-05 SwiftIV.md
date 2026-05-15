@@ -3,7 +3,7 @@ title: "SwiftI2V: Efficient High-Resolution Image-to-Video Generation via Condit
 collection: publications
 date: 2026-05-07
 venue: "Preprint 2026"
-authors: "YaoYang Liu, Yuechen Zhang, Wenbo Li, Yufei Zhao, Rui Liu, Long Chen"
+authors: "Yaoyang Liu, Yuechen Zhang, Wenbo Li, Yufei Zhao, Rui Liu, Long Chen"
 arxiv: "https://arxiv.org/abs/2605.06356"
 project: "https://hkust-longgroup.github.io/SwiftI2V/"
 code: "https://github.com/hkust-longgroup/SwiftI2V"
