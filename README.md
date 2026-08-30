@@ -7,7 +7,7 @@ Built on top of [Academic Pages](https://github.com/academicpages/academicpages.
 
 ## 🧭 About me
 
-- 🎓 First-year Ph.D. student at **HKUST CSE**, advised by [Prof. Long Chen](https://zjuchenlong.github.io/).
+- 🎓 Second-year Ph.D. student at **HKUST CSE**, advised by [Prof. Long Chen](https://zjuchenlong.github.io/).
 - 🎓 B.Eng. in Artificial Intelligence, **USTC** (2021 – 2025).
 - 🔬 Research interests: **video generation**, efficient generation, high-quality synthesis.
 
