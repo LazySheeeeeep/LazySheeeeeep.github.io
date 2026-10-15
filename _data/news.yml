@@ -1,0 +1,30 @@
+# Homepage news, newest first.
+# date: shown as-is; emoji: optional; text: Markdown supported.
+
+- date: "2026.10"
+  emoji: "🚀"
+  text: "**[RAR](https://hkust-longgroup.github.io/RAR/)** is out on arXiv — one interactive world model, any rollout rate."
+
+- date: "2026.05"
+  emoji: "⚡"
+  text: "**[SwiftI2V](https://hkust-longgroup.github.io/SwiftI2V/)** is out — 2K image-to-video generation on a single RTX 4090."
+
+- date: "2026.04"
+  emoji: "🎉"
+  text: "**BA-Att** is accepted to **CVPR 2026 Findings**."
+
+- date: "2026.01"
+  emoji: "🎉"
+  text: "**[V2P-Bench](https://vlm-reasoning.github.io/V2P-Bench/)** is accepted to **ICLR 2026**."
+
+- date: "2025.09"
+  emoji: "🎓"
+  text: "Started my Ph.D. at **HKUST**, advised by [Prof. Long Chen](https://zjuchenlong.github.io/)."
+
+- date: "2025.06"
+  emoji: "🎉"
+  text: "**[Magic Mirror](https://julianjuaner.github.io/projects/MagicMirror/)** is accepted to **ICCV 2025**."
+
+- date: "2024.09"
+  emoji: "✨"
+  text: "**[ChronoMagic-Bench](https://pku-yuangroup.github.io/ChronoMagic-Bench/)** is accepted to **NeurIPS 2024 D&B Track** as a **Spotlight**."

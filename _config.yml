@@ -22,6 +22,7 @@ repository               : "LazySheeeeeep/LazySheeeeeep.github.io"
 author:
   # Biographic information
   avatar           : "self_web.jpg"
+  avatar_hover     : "self.jpg" # shown when hovering the avatar; leave blank to disable
   name             : "Yaoyang Liu (刘耀阳)"
   pronouns         : # example: "she/her"  
   bio              : "The Hong Kong University of Science and Technology"

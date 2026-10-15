@@ -9,4 +9,7 @@ project: "https://hkust-longgroup.github.io/SwiftI2V/"
 code: "https://github.com/hkust-longgroup/SwiftI2V"
 excerpt: "We propose SwiftI2V, an efficient framework for high-resolution (2K) I2V generation that decouples motion modeling from detail synthesis via progressive segment-wise generation and bidirectional contextual interaction. SwiftI2V achieves performance comparable to end-to-end baselines while reducing total GPU-time by 202×, enabling practical 2K I2V on a single RTX 4090."
 thumbnail: "/images/SwiftI2V.jpg"
+thumbnail_fit: cover
+thumbnail_position: "center top"
+selected: true
 ---

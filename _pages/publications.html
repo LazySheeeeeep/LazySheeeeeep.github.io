@@ -7,11 +7,16 @@ author_profile: true
 
 {% include base_path %}
 
-<!-- New style rendering if publication categories are defined -->
+<p class="pub-legend">
+  <span><strong>*</strong> Equal contribution</span>
+  {% if site.author.googlescholar %}
+    <span class="pub-legend__sep">·</span>
+    <a href="{{ site.author.googlescholar }}" target="_blank" rel="noopener">Full list on Google Scholar <i class="fas fa-arrow-up-right-from-square"></i></a>
+  {% endif %}
+</p>
 
+<div class="pub-list">
 {% for post in site.publications reversed %}
   {% include archive-single.html %}
 {% endfor %}
-
-
-
+</div>

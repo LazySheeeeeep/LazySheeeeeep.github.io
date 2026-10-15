@@ -1,75 +1,64 @@
-<div class="pub-card">
+{% if post.project %}
+  {% assign primary_url = post.project %}
+{% elsif post.arxiv %}
+  {% assign primary_url = post.arxiv %}
+{% elsif post.paperurl %}
+  {% assign primary_url = post.paperurl %}
+{% else %}
+  {% assign primary_url = nil %}
+{% endif %}
+
+<article class="pub-card{% unless post.thumbnail %} pub-card--no-thumb{% endunless %}">
   {% if post.thumbnail %}
-    {% capture thumb_html %}
-      {% if post.thumbnail_split %}
-        <div class="pub-card__tiles" role="img" aria-label="{{ post.title }} thumbnail">
-          {% for i in (0..post.thumbnail_split) limit: post.thumbnail_split %}
-            {% assign last_idx = post.thumbnail_split | minus: 1 %}
-            {% if last_idx > 0 %}
-              {% assign pos = i | times: 100.0 | divided_by: last_idx %}
-            {% else %}
-              {% assign pos = 0 %}
-            {% endif %}
-            <span class="pub-card__tile" style="background-image: url('{{ post.thumbnail | relative_url }}'); background-size: {{ post.thumbnail_split | times: 100 }}% 100%; background-position: {{ pos }}% 0; aspect-ratio: {{ post.thumbnail_tile_ratio | default: '4 / 3' }};"></span>
-          {% endfor %}
-        </div>
+    {% capture thumb_img %}<img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }}" loading="lazy" decoding="async"{% if post.thumbnail_position %} style="object-position: {{ post.thumbnail_position }};"{% endif %}>{% endcapture %}
+    {% assign thumb_fit = post.thumbnail_fit | default: 'contain' %}
+    <div class="pub-card__thumb pub-card__thumb--{{ thumb_fit }}">
+      {% if primary_url %}
+        <a href="{{ primary_url }}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">{{ thumb_img }}</a>
       {% else %}
-        <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }} thumbnail">
-      {% endif %}
-    {% endcapture %}
-    <div class="pub-card__thumb">
-      {% if post.project %}
-        <a href="{{ post.project }}" target="_blank" rel="noopener">{{ thumb_html }}</a>
-      {% elsif post.arxiv %}
-        <a href="{{ post.arxiv }}" target="_blank" rel="noopener">{{ thumb_html }}</a>
-      {% else %}
-        {{ thumb_html }}
+        {{ thumb_img }}
       {% endif %}
     </div>
   {% endif %}
 
   <div class="pub-card__body">
-    <!-- Title -->
     <h3 class="pub-card__title" itemprop="headline">
-      {% if post.project %}
-        <a href="{{ post.project }}" target="_blank" rel="noopener">{{ post.title }}</a>
-      {% elsif post.arxiv %}
-        <a href="{{ post.arxiv }}" target="_blank" rel="noopener">{{ post.title }}</a>
-      {% elsif post.paperurl %}
-        <a href="{{ post.paperurl }}" target="_blank" rel="noopener">{{ post.title }}</a>
+      {% if primary_url %}
+        <a href="{{ primary_url }}" target="_blank" rel="noopener">{{ post.title }}</a>
       {% else %}
         {{ post.title }}
       {% endif %}
     </h3>
 
-    <!-- Author list -->
     {% if post.authors %}
       <p class="pub-card__authors">
         {% assign author_list = post.authors | split: ", " %}
         {% for name in author_list %}
           {% assign lower_name = name | downcase %}
-          {% if lower_name contains "yaoyang liu" %}
-            <strong>{{ name }}</strong>{% unless forloop.last %}, {% endunless %}
-          {% else %}
-            {{ name }}{% unless forloop.last %}, {% endunless %}
-          {% endif %}
+          {% if lower_name contains "yaoyang liu" %}<strong class="pub-card__me">{{ name }}</strong>{% else %}{{ name }}{% endif %}{% unless forloop.last %}, {% endunless %}
         {% endfor %}
       </p>
     {% endif %}
 
-    <!-- Venue -->
-    {% if post.venue %}
-      <p class="pub-card__venue"><span class="pub-card__venue-tag">{{ post.venue }}</span></p>
-    {% endif %}
-
-    <!-- Excerpt -->
-    {% if post.excerpt %}
-      <p class="pub-card__excerpt" itemprop="description">
-        {{ post.excerpt | markdownify | strip_html }}
+    {% if post.venue or post.highlight or post.badge %}
+      <p class="pub-card__meta">
+        {% if post.badge %}
+          <span class="pub-tag pub-tag--new">{{ post.badge }}</span>
+        {% endif %}
+        {% if post.venue %}
+          {% assign venue_lower = post.venue | downcase %}
+          <span class="pub-tag{% if venue_lower contains 'preprint' or venue_lower contains 'arxiv' %} pub-tag--muted{% endif %}">{{ post.venue }}</span>
+        {% endif %}
+        {% if post.highlight %}
+          <span class="pub-tag pub-tag--highlight">{{ post.highlight }}</span>
+        {% endif %}
       </p>
     {% endif %}
 
-    <!-- Links -->
+    {% if post.excerpt %}
+      <p class="pub-card__excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | strip }}</p>
+    {% endif %}
+
     <p class="pub-card__links">
       {% if post.arxiv %}
         <a href="{{ post.arxiv }}" target="_blank" rel="noopener" class="pub-link"><i class="ai ai-arxiv"></i> arXiv</a>
@@ -85,4 +74,4 @@
       {% endif %}
     </p>
   </div>
-</div>
+</article>

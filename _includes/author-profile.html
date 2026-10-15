@@ -7,10 +7,15 @@
 <div itemscope itemtype="http://schema.org/Person">
 
   <div class="author__avatar">
+    {% if author.avatar_hover %}<span class="avatar-flip">{% endif %}
     {% if author.avatar contains "://" %}
     	<img src="{{ author.avatar }}" alt="{{ author.name }}">
     {% else %}
     	<img src="{{ author.avatar | prepend: "/images/" | prepend: base_path }}" class="author__avatar" alt="{{ author.name }}">
+    {% endif %}
+    {% if author.avatar_hover %}
+      <img src="{{ author.avatar_hover | prepend: "/images/" | prepend: base_path }}" class="avatar-flip__back" alt="" aria-hidden="true" loading="lazy">
+    </span>
     {% endif %}
   </div>
 
@@ -74,7 +79,7 @@
         <li><a href="https://dribbble.com/{{ author.dribbble }}"><i class="fab fa-fw fa-dribbble icon-pad-right" aria-hidden="true"></i>Dribbble</a></li>
       {% endif %}      
       {% if author.github %}
-        <li><a href="https://github.com/{{ author.github }}"><i class="fab fa-fw fa-github icon-pad-right" aria-hidden="true"></i>Github</a></li>
+        <li><a href="https://github.com/{{ author.github }}"><i class="fab fa-fw fa-github icon-pad-right" aria-hidden="true"></i>GitHub</a></li>
       {% endif %}
       {% if author.kaggle %}
         <li><a href="https://kaggle.com/{{ author.kaggle }}"><i class="fab fa-fw fa-kaggle icon-pad-right" aria-hidden="true"></i>Kaggle</a></li>

@@ -1,20 +1,32 @@
 ---
 permalink: /
-title: "Personal website for LYY"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
 
-<div class="home-hero">
-  <h2 class="home-greeting">👋 Hi there, I'm <span class="home-name">Yaoyang Liu</span>.</h2>
-</div>
+<section class="home-hero">
+  <p class="home-eyebrow"><span class="home-eyebrow__dot"></span>Ph.D. Student @ HKUST</p>
+  <h1 class="home-greeting">Hi, I'm <span class="home-name">Yaoyang Liu</span></h1>
+  <p class="home-tagline">Making video generation <span class="home-rotator" data-words="faster|better|more controllable">faster</span><span class="home-caret" aria-hidden="true"></span></p>
+</section>
 
-I'm a second-year Ph.D. student at [HKUST](https://hkust.edu.hk/), advised by [Prof. Long Chen](https://zjuchenlong.github.io/). My research focuses on **video generation**, aiming to make it **faster**, **better**, and **more controllable**.
+I'm a second-year Ph.D. student at [HKUST](https://hkust.edu.hk/), advised by [Prof. Long Chen](https://zjuchenlong.github.io/). My research focuses on **video generation** and **interactive world models**, aiming to make them **faster**, **better**, and **more controllable**.
 
-## 🎓 Education
+<ul class="home-tags">
+  <li>🎬 Video Generation</li>
+  <li>🌍 Interactive World Models</li>
+  <li>⚡ Efficient Generation</li>
+  <li>🎛️ Controllable Generation</li>
+</ul>
 
+{% include home/news.html limit=5 %}
+
+{% include home/selected-publications.html %}
+
+<section class="home-section" id="education">
+<h2 class="home-section__title"><span>🎓 Education</span><a class="home-section__more" href="{{ '/cv/' | relative_url }}">Full CV <i class="fas fa-arrow-right"></i></a></h2>
 <ul class="timeline">
   <li class="timeline-item">
     <div class="timeline-row">
@@ -38,3 +50,4 @@ I'm a second-year Ph.D. student at [HKUST](https://hkust.edu.hk/), advised by [P
     </div>
   </li>
 </ul>
+</section>

@@ -9,3 +9,6 @@ group :jekyll_plugins do
 end
 
 gem 'github-pages'
+
+# Windows local preview only
+gem 'tzinfo-data', platforms: [:windows]

@@ -1,0 +1,12 @@
+{%- assign selected = site.publications | where: "selected", true | sort: "date" | reverse -%}
+{%- if selected.size > 0 -%}
+<section class="home-section" id="selected-publications">
+<h2 class="home-section__title"><span>📝 Selected Publications</span><a class="home-section__more" href="{{ '/publications/' | relative_url }}">All publications <i class="fas fa-arrow-right"></i></a></h2>
+<div class="pub-list">
+{%- for post in selected -%}
+{%- capture card -%}{% include archive-single.html %}{%- endcapture -%}
+{{ card | strip_newlines | strip }}
+{%- endfor -%}
+</div>
+</section>
+{%- endif -%}

@@ -1,0 +1,15 @@
+{%- assign news_limit = include.limit | default: 5 -%}
+<section class="home-section" id="news">
+<h2 class="home-section__title"><span>📰 News</span></h2>
+<ul class="news-list">
+{%- for item in site.data.news -%}
+<li class="news-item{% if forloop.index > news_limit %} news-item--more{% endif %}">
+<span class="news-item__date">{{ item.date }}</span>
+<span class="news-item__text">{% if item.emoji %}<span class="news-item__emoji">{{ item.emoji }}</span>{% endif %}{{ item.text | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span>
+</li>
+{%- endfor -%}
+</ul>
+{%- if site.data.news.size > news_limit -%}
+<button type="button" class="news-toggle" data-more="Show more" data-less="Show less" onclick="var l=this.previousElementSibling;var o=l.classList.toggle('is-expanded');this.textContent=o?this.dataset.less:this.dataset.more;this.setAttribute('aria-expanded',o);" aria-expanded="false">Show more</button>
+{%- endif -%}
+</section>
