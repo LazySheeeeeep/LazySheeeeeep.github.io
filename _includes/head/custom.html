@@ -868,10 +868,11 @@
   (function() {
     try {
       var saved = localStorage.getItem('theme');
-      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var theme = saved || (prefersDark ? 'dark' : 'light');
+      var theme = saved || 'dark';
       document.documentElement.setAttribute('data-theme', theme);
-    } catch (e) {}
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
   })();
 </script>
 
@@ -888,7 +889,7 @@
       btn.setAttribute('title', 'Toggle dark mode');
       btn.innerHTML = '<span class="icon-moon">🌙</span><span class="icon-sun">☀️</span>';
       btn.addEventListener('click', function() {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
+        var cur = document.documentElement.getAttribute('data-theme') || 'dark';
         var next = cur === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
         try { localStorage.setItem('theme', next); } catch (e) {}
