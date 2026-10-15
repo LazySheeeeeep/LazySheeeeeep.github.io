@@ -1,16 +1,29 @@
 <div class="pub-card">
   {% if post.thumbnail %}
-    <div class="pub-card__thumb">
-      {% if post.project %}
-        <a href="{{ post.project }}" target="_blank" rel="noopener">
-          <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }} thumbnail">
-        </a>
-      {% elsif post.arxiv %}
-        <a href="{{ post.arxiv }}" target="_blank" rel="noopener">
-          <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }} thumbnail">
-        </a>
+    {% capture thumb_html %}
+      {% if post.thumbnail_split %}
+        <div class="pub-card__tiles" role="img" aria-label="{{ post.title }} thumbnail">
+          {% for i in (0..post.thumbnail_split) limit: post.thumbnail_split %}
+            {% assign last_idx = post.thumbnail_split | minus: 1 %}
+            {% if last_idx > 0 %}
+              {% assign pos = i | times: 100.0 | divided_by: last_idx %}
+            {% else %}
+              {% assign pos = 0 %}
+            {% endif %}
+            <span class="pub-card__tile" style="background-image: url('{{ post.thumbnail | relative_url }}'); background-size: {{ post.thumbnail_split | times: 100 }}% 100%; background-position: {{ pos }}% 0; aspect-ratio: {{ post.thumbnail_tile_ratio | default: '4 / 3' }};"></span>
+          {% endfor %}
+        </div>
       {% else %}
         <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }} thumbnail">
+      {% endif %}
+    {% endcapture %}
+    <div class="pub-card__thumb">
+      {% if post.project %}
+        <a href="{{ post.project }}" target="_blank" rel="noopener">{{ thumb_html }}</a>
+      {% elsif post.arxiv %}
+        <a href="{{ post.arxiv }}" target="_blank" rel="noopener">{{ thumb_html }}</a>
+      {% else %}
+        {{ thumb_html }}
       {% endif %}
     </div>
   {% endif %}
